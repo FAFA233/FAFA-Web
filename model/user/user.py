@@ -8,10 +8,8 @@ class User(SQLModel,table = True):
         self.password: str = Field(default = None)
         self.__db: sql = sql("user.db")
 
-    def register():
+    def register(username,password):
 
-       username = input()
-       password = input()
        user = {
            "name":username,
            "password":password
@@ -20,18 +18,16 @@ class User(SQLModel,table = True):
        db.add(user)
        print("注册成功")
         
-    def login():
-        username = input()
-        password = input()
-       
+    def login(username,password):
+              
         db = sql("user.db")
         result = db.find(username)
 
         if len(result) > 0:
             stored_password = result[0]['password']
             if password == stored_password:
-                print("登录成功")
+                return True
             else:
-                print("密码错误")
+                return False
         else:
-            print("用户不存在")
+            return "用户不存在"
