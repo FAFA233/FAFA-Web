@@ -13,6 +13,8 @@ def login():
         return "Login successful"  # 返回登录成功的提示信息
     else:
         return "Login failed"
+
+def register():
     
-if __name__ == '__main__':
+ if __name__ == '__main__':
     app.run()
