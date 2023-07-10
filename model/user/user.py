@@ -21,7 +21,7 @@ class User(SQLModel,table = True):
        }
         db = sql("user.db")
         db.add(user)
-        return "注册成功"
+        return True
         
     def login(username : str, password : str):
         """实现登录

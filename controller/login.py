@@ -15,6 +15,8 @@ def login():
         return "Login failed"
 
 def register():
+    if(user.register(user_information.username and user_information.password)):
+        return "registe successfully"
     
- if __name__ == '__main__':
+if __name__ == '__main__':
     app.run()
