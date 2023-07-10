@@ -6,6 +6,7 @@ class Sql():
         self.engine = create_engine(database_url)  # 创建SQLite数据库引擎并链接到数据库
 
     def add(self, user):#执行添加用户
+
         with self.engine.connect() as connection:
             connection.execute(f"INSERT INTO users (name, password) VALUES ('{user['name']}', '{user['password']}')")
             #将用户的名称(name)和密码(password)插入到 users 表的相应列中，以创建一个新的用户记录
