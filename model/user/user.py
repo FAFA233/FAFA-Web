@@ -35,8 +35,8 @@ class User(SQLModel,table = True):
         if len(result) > 0:#判断列表长度是否大于0
             stored_password = result[0]['password']#
             if password == stored_password:
-                print("登录成功")
+                return True
             else:
-                print("密码错误")
+                return False
         else:
-            print("用户不存在")
+            return "用户不存在"

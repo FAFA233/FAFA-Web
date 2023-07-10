@@ -9,9 +9,10 @@ class user_information:
 
 def login():
 
-    user.login(user_information.username,user_information.password)
+    if(user.login(user_information.username,user_information.password)==True):
+        return "Login successful"  # 返回登录成功的提示信息
+    else:
+        return "Login failed"
     
-    return "Login successful"  # 返回登录成功的提示信息
-
 if __name__ == '__main__':
     app.run()
