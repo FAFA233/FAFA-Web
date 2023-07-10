@@ -16,7 +16,7 @@ class User(SQLModel,table = True):
        }
        db = sql("user.db")
        db.add(user)
-       print("注册成功")
+       return "注册成功"
         
     def login(username,password):
               
