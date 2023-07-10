@@ -1,0 +1,208 @@
+p{
+    color: rgb(211, 183, 146);
+    width: 500px;
+    font-size: 30px;
+    text-align: left
+}
+#xf{
+    text-shadow: 1px 1px 1px rgb(207, 207, 207);
+}
+h1{
+    font-size: 60px;
+    text-align: center;
+    color: cadetblue;
+}
+h2{
+    font-size: 30px;
+    text-align: center;
+    color: cadetblue;
+}
+h3{
+    text-align: end;
+    color: rgba(255, 255, 255, 0.614);
+}
+h4{
+    font-size: 20px;
+    text-align: center;
+}
+h5{
+    color: rgb(211, 183, 146);
+    width: 500px;
+    font-size: 30px;  
+}
+li{
+    list-style-type: armenian;
+    font-size: 20px;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    color: black;
+}
+body{
+    top: auto;
+    width: 100%;
+    height: 100%;
+    background-image:url("../images/123.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px 20px 20px;
+    border: 5px solid rgba(71, 118, 119, 0.43);
+    }
+#img1 {
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin: 0 auto;
+}
+
+#xf1{
+    width: 400px;
+    height: 400px;
+    display: block;
+    margin: 0 auto;
+}
+.alpha {
+    width: auto;
+    height: auto;
+    background: rgba(203, 203, 203, 0.3);
+    line-height: 100px;
+}
+.bravo{
+    width: 180px;
+    height: 100;
+    background: rgba(157, 157, 157, 0.3);
+    text-align: left;
+    line-height: 30px;
+}
+#tel{
+    text-align-last: right;
+    color: rgb(0, 0, 0);
+}
+#share{
+    text-align-last: right;
+    color: rgb(0, 0, 0);
+}
+#get{
+    text-size-adjust: 25px;
+}
+a[href^='mailto']::before {
+    content: '✈ ';
+    background-color: rgb(186, 255, 186);
+}
+footer{
+    background: rgba(203, 203, 203, 0.3);
+}
+nav{
+    background: rgba(203, 203, 203, 0.3);
+}
+video{
+    width: 100%;
+    height: 100%;
+    background: rgba(203, 203, 203, 0.3);
+}
+.special {
+    color: orange;
+    font-weight: bold;
+  }
+  li em {
+  color: rgb(0, 61, 38);
+}
+a:hover {
+    text-decoration: none;
+}
+a:link {
+    text-decoration: none;
+}
+.outer {
+    border: 5px solid rgb(255, 196, 0);
+  }
+  
+  .box {
+  padding: 10px;
+  width: calc(25% - 80px);
+  background-color: rgb(255, 143, 246);
+  color: rgb(82, 80, 80);
+  }
+  .git{
+    transform: rotate(0.8turn)
+  }
+  @media (min-width: 70em) {
+    body {
+      font-size: 130%;
+    }
+  }
+span{
+    border: 1px solid rgb(7, 6, 6);
+    background-color: rgb(186, 255, 186);
+}
+
+
+
+
+
+a {
+    text-decoration: none
+}
+#logo{
+    width: 100%;
+}
+nav {
+    height: 70px;
+    width: 100%;
+    border: 2px solid rgba(0, 0, 0, 0.43);
+    background: rgba(203, 203, 203, 0.3);
+}
+#logoimage{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+#menu1 li{
+    width: auto;
+    list-style: none;
+    padding: 0%;
+    margin: 0%;
+    float: left;
+    display: block;
+}
+#menu{
+    position: absolute;
+    top: -13px;
+    left: 160px;
+}
+
+#menu li a{
+    display: block;
+    padding: 20px;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    border-right: 1px solid rgba(0, 0, 0, 0.43);
+}
+span {
+    position: absolute;
+    top: 25px;
+    left: 70px;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    text-align: top;
+    letter-spacing: 3px;
+}
+#menuheadimage{
+    position: right;
+    top: 5px;
+    right: 5px;
+}
+.round_icon{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background: rgba(203, 203, 203, 0.3);
+    border: 2px solid rgba(0, 0, 0, 0.43);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
