@@ -13,6 +13,10 @@ def login():
         return "Login successful"  # 返回登录成功的提示信息
     else:
         return "Login failed"
+
+def register():
+    if(user.register(user_information.username and user_information.password)):
+        return "registe successfully"
     
 if __name__ == '__main__':
     app.run()
