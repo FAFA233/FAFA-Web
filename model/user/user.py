@@ -8,7 +8,7 @@ class User(SQLModel,table = True):
         self.password: str = Field(default = None)
         self.__db: sql = sql("user.db")
 
-    def register(username, password):
+    def register(username : str, password : str):
         """实现注册
 
         Args:
@@ -18,10 +18,10 @@ class User(SQLModel,table = True):
         user = {
            "name":username,
            "password":password
-        }#user里面有name，password
+        }
         db = sql("user.db")#创建了一个名为 db 的变量，并实例化了一个名为 sql 的类，并传递了 "user.db" 作为参数。
         db.add(user) #对象的数据插入到数据库的适当位置，以创建一个新的用户记录
-        print("注册成功")
+        return True
         
     def login(username : str, password : str):
         """实现登录
@@ -33,10 +33,12 @@ class User(SQLModel,table = True):
         db = sql("user.db")
         result = db.find(username)#函数调用 “db” 的数据库对象，“username” 作为搜索条件查找并返回所有与给定用户名匹配的记录
         if len(result) > 0:#判断列表长度是否大于0
-            stored_password = result[0]['password']#
+            stored_password = result[0]['password']
+            #result[0]表示获取结果列表result中的第一个元素（记录）,然后通过['password']来获取该记录中名为"password"的字段的值。
             if password == stored_password:
                 return True
             else:
                 return False
         else:
-            return "用户不存在"
+            return False
+        
