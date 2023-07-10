@@ -9,6 +9,7 @@ class User(SQLModel,table = True):
         self.__db: sql = sql("user.db")
 
     def register():
+
        username = input()
        password = input()
        user = {
