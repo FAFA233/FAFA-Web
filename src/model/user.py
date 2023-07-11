@@ -1,12 +1,11 @@
 from sqlmodel import Field, Session,SQLModel,create_engine
-from sql import Sql
-
-class User(SQLModel,table = True):
+from sql import SQL
+class User(SQLModel):
     def __init__(self):
         self.id: int = Field(default = None,primary_key = True)
         self.username: str = Field(default = None)
         self.password: str = Field(default = None)
-        self.__db: Sql = Sql("user.db")
+        self.__db: SQL = SQL("user.db")
 
     def register(self,username : str, password : str):
         """实现注册
