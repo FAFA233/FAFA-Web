@@ -20,7 +20,7 @@ class User(SQLModel,table = True):
            "password":password
         }
         #创建了一个名为 db 的变量，并实例化了一个名为 sql 的类，并传递了 "user.db" 作为参数。
-        self.__db.add(user) #对象的数据插入到数据库的适当位置，以创建一个新的用户记录
+        self.__db.add(user) #对象的数据插入到数据库适当位置，以创建一个新的用户记录
         return True
         
     def login(self,username : str, password : str):
