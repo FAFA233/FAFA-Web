@@ -11,7 +11,7 @@ def print_json():
     Returns:
         json里的名言部分
     """
-    url = 'https://v1.hitokoto.cn/?c=a&c&i&d&k=c'
+    url = 'https://v1.hitokoto.cn/?c=a&c&i&d&k=c'#限定获取句子的种类
     js= requests.get(url)
     l_str=json.loads(js.text)
     return l_str['hitokoto']
