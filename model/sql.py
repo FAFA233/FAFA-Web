@@ -10,13 +10,13 @@ class Sql():
         with self.engine.connect() as connection:
             connection.execute(f"INSERT INTO users (name, password) VALUES ('{user['name']}', '{user['password']}')")
             #将用户的名称(name)和密码(password)插入到 users 表的相应列中，以创建一个新的用户记录
-        return "添加成功"
+        return True#添加成功返回true
     
     def delete(self, name, password):
         with self.engine.connect() as connection:
             connection.execute(f"DELETE FROM users WHERE name='{name}' AND password='{password}'")
             #将用户的名称(name)和密码(password)删除
-        return "删除成功"
+        return True#删除成功返回true
 
     def find(self, name):#执行查找用户
         with self.engine.connect() as connection:
@@ -29,4 +29,4 @@ class Sql():
         with self.engine.connect() as connection:
             connection.execute(f"UPDATE users SET password='{password}' WHERE name='{name}'")
             #更新条件的语法，指定要更新的记录的筛选条件。根据具体的表结构定义列名，用 name 列来匹配特定名称。
-        return "修改成功"
+        return True#修改成功返回true
