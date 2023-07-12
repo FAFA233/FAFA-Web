@@ -7,27 +7,28 @@ class user():
         password=request.form.get('password')
         new_password=request.form.get('new_password')
         is_login=request.form.get('is_login')
+
     def login (self,user_name ,password):
         try :
-            user.find(user_name , password)
+            self.user.find(user_name )
         except:
             print:("ERROR")
     
     def register(self, user_name,password ):
         try:
-            user.add(user_name,password)
+            self.register(user_name,password)
         except:
             print("ERROR")
 
     def change(self,user_name,new):
         try:
-            user.change(user_name, new_password) 
+            self.change(user_name, new_password) 
         except:
             print("ERROR")       
 
     def delete(self,user_name, password):
         try:
-            user.delete(user_name, new_password)
+            self.delete(user_name, new_password)
         except:
             print("ERROR")
 
