@@ -21,8 +21,8 @@ class UserDB(DB):
     def __init__(self):#UserDB类构造函数,调用DB类,将user.db作为参数传递给它
         super(UserDB, self).__init__("user.db")
 
-    def add(self):#向users表中添加新用户,将信息插入到数据库中
-        self.connection.execute(f"INSERT INTO users (name, password) VALUES ('{self.name}', '{self.name}')")
+    def add(self,name,password):#向users表中添加新用户,将信息插入到数据库中
+        self.connection.execute(f"INSERT INTO users (name, password) VALUES ('{name}', '{password}')")
         
      
     def delete(self,name,password):#在user表中删除用户信息
