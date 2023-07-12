@@ -17,7 +17,6 @@ class DB(object):
     def find(self):
         pass
 
-
 class UserDB(DB):
     def __init__(self):#UserDB类构造函数,调用DB类,将user.db作为参数传递给它
         super(UserDB, self).__init__("user.db")
