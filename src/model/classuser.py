@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from sql import UserDB
 class user():
     def __init__(self) :
         self.user=UserDB()
@@ -29,4 +30,9 @@ class user():
             self.user.delete(user_name, new_password)
         except:
             print("ERROR")
-    
+
+    def login_stastus(user_name,is_login):
+        try:
+            self.user.change_login_status(user_name,is_login)
+        except:
+            print('ERROR')
