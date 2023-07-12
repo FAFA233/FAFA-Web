@@ -1,27 +1,11 @@
 from sqlmodel import Field, Session,SQLModel,create_engine
-from sql import Sql
-
+from sql import SQL
 class User(SQLModel):
-    def __init__(self):
-        self.id: int = Field(default = None,sa_primary_key = True)
+    def __init__(self, username, password):
+        self.id: int = Field(default = None,primary_key = True)
         self.username: str = Field(default = None)
         self.password: str = Field(default = None)
-        self.__db: Sql = Sql("user.db")
-
-    def register(self,username : str, password : str):
-        """实现注册
-
-        Args:
-            username (str): 用户名
-            password (str): 密码
-        """
-        user = User(username = username,password = password)
-        #创建了一个名为 db 的变量，并实例化了一个名为 sql 的类，并传递了 "user.db" 作为参数。
-        with Session(self.engine) as session:  # 创建会话
-            session.add(user)  # 将对象添加到会话中，以创建新的用户记录
-            session.commit()  # 提
-        self.__db.add(user) #对象的数据插入到数据库适当位置，以创建一个新的用户记录
-        return True
+        self.__db: SQL = SQL("user.db")
         
     def login(self,username : str, password : str):
         """实现登录
@@ -30,7 +14,6 @@ class User(SQLModel):
             username (str): 用户名
             password (str): 密码
         """
-        
         result = self.__db.find(username)#函数调用 “db” 的数据库对象，“username” 作为搜索条件查找并返回所有与给定用户名匹配的记录
         if len(result) > 0:#判断列表长度是否大于0
             stored_password = result[0]['password']
@@ -41,6 +24,18 @@ class User(SQLModel):
                 return False#否则返回false
         else:
             return False#如果找不到用户名，返回false
+
+    def register(self,username : str, password : str):
+        """实现注册
+
+        Args:
+            username (str): 用户名
+            password (str): 密码
+        """
+        user = User(username, password)
+        #创建了一个名为 db 的变量，并实例化了一个名为 sql 的类，并传递了 "user.db" 作为参数。
+        self.__db.add(user) #对象的数据插入到数据库适当位置，以创建一个新的用户记录
+        return True
     
     def forgotton_password(self,username : str,new_password : str):
         """实现修改密码
