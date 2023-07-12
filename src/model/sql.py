@@ -23,8 +23,7 @@ class UserDB(DB):
 
     def add(self):#向users表中添加新用户,将信息插入到数据库中
         self.connection.execute(f"INSERT INTO users (name, password) VALUES ('{UserDB['name']}', '{UserDB['password']}')")
-        
-     
+
     def delete(self,name,password):#在user表中删除用户信息
         self.connection.execute(f"DELETE FROM users WHERE name='{name}' AND password='{password}'")
         #删除

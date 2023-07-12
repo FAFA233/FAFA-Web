@@ -1,11 +1,11 @@
 from sqlmodel import Field, Session,SQLModel,create_engine
-from sql import SQL
+from sql import UserDB
 class User(SQLModel):
     def __init__(self, username, password):
         self.id: int = Field(default = None,primary_key = True)
         self.username: str = Field(default = None)
         self.password: str = Field(default = None)
-        self.__db: SQL = SQL("user.db")
+        self.__db: UserDB = UserDB()
         
     def login(self,username : str, password : str):
         """实现登录
