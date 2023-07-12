@@ -43,5 +43,6 @@ class UserDB(DB):
     def change_login_status(self,name, is_login):#根据用户名字和登录状态更新is_login的值
             self.connection.execute(f"UPDATE users SET is_login={int(is_login)} WHERE name='{name}'")
             
-        
+
+
 
