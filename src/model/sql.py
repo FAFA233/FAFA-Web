@@ -22,7 +22,7 @@ class UserDB(DB):
         super(UserDB, self).__init__("user.db")
 
     def add(self):#向users表中添加新用户,将信息插入到数据库中
-        self.connection.execute(f"INSERT INTO users (name, password) VALUES ('{UserDB['name']}', '{UserDB['password']}')")
+        self.connection.execute(f"INSERT INTO users (name, password) VALUES ('{self.name}', '{self.name}')")
         
      
     def delete(self,name,password):#在user表中删除用户信息
@@ -37,6 +37,8 @@ class UserDB(DB):
     def find(self,name) -> str:#查找指定用户,返回列表中用户信息
         result = self.connection.execute(f"SELECT * FROM users WHERE name='{name}'")
         # 查询条件,指定筛选条件.根据您具体的表结构定义的列名
+        user = result.fechone()
+        return user
     
     def change_login_status(self,name, is_login):#根据用户名字和登录状态更新is_login的值
             self.connection.execute(f"UPDATE users SET is_login={int(is_login)} WHERE name='{name}'")
