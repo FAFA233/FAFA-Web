@@ -3,10 +3,6 @@ from sql import UserDB
 class user():
     def __init__(self) :
         self.user=UserDB()
-        user_name=request.form.get('username')
-        password=request.form.get('password')
-        new_password=request.form.get('new_password')
-        is_login=request.form.get('is_login')
 
     def login (self,user_name ,password):
         self.user.find(user_name )
