@@ -9,31 +9,17 @@ class user():
         is_login=request.form.get('is_login')
 
     def login (self,user_name ,password):
-        try :
-            self.user.find(user_name )
-        except:
-            print:("ERROR")
-    
+        self.user.find(user_name )
+            
     def register(self, user_name,password ):
-        try:
             self.register(user_name,password)
-        except:
-            print("ERROR")
-
-    def change(self,user_name,new):
-        try:
+        
+    def change(self,user_name,new_password):
             self.change(user_name, new_password) 
-        except:
-            print("ERROR")       
 
-    def delete(self,user_name, password):
-        try:
-            self.delete(user_name, new_password)
-        except:
-            print("ERROR")
-
+    def delete(self,user_name, new_password):
+         self.delete(user_name, new_password)
+       
     def login_stastus(self,user_name,is_login):
-        try:
-            self.user.change_login_status(user_name,is_login)
-        except:
-            print('ERROR')
+        self.user.change_login_status(user_name,is_login)
+        
