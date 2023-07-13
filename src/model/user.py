@@ -40,3 +40,5 @@ class Administrator(user):
 
     def reset_password(self,user_name,password):#重置用户密码
         self.user.change(user_name,password)
+
+
