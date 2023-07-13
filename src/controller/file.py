@@ -1,4 +1,4 @@
-from sql import DB
+from model.sql import DB
 
 class ArticleDB(DB):
     def __init__(self):
