@@ -12,7 +12,7 @@ class user():
         self.user.find(user_name )
             
     def register(self, user_name,password ):
-        self.user.register(user_name,password)
+        self.user.add(user_name,password)
         
     def change(self,user_name,new_password):
         self.user.change(user_name, new_password) 
