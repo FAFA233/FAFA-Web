@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
-from model.classuser import user
+from controller import control
 
-app=Flask(__name__)
-user=user()
+app=Flask('__name__')
 
+if __name__ == "__main__":
+    app.run()
