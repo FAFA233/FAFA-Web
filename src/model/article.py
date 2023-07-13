@@ -12,7 +12,9 @@ class article:
     
     def delete(self):
         pass
-
+    
+    def download(self):
+        pass
     
 
     
