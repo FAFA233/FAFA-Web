@@ -30,7 +30,7 @@ class user():
 class Administrator(user):
     def __init__(self):#赋予管理员三个权限
         super().__init__()
-        self.permissions=['reset_password','creat_user','delete_user']
+        self.permissions=['reset_password','creat_user','delete_user','get_all_users']
 
     def delete_user(self,user_name):#删除用户
         self.user.delete(user_name)
@@ -41,4 +41,6 @@ class Administrator(user):
     def reset_password(self,user_name,password):#重置用户密码
         self.user.change(user_name,password)
 
+    def get_all_users(self):#获取全部用户信息
+        return self.user.get_all_users()
 
