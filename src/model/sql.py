@@ -51,5 +51,6 @@ class UserDB(DB):
         result=self.connection.execute(mate,(username,password)).fetchone()
         if result is None:
             raise Exception("用户名与密码未匹配")
+        
     
 
