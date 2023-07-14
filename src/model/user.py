@@ -9,8 +9,9 @@ class user():
         self.is_login=request.form.get('is_login')
         self.permissions=[]#用户权限列表
 
-    def login(self,user_name ,password):
-        self.user.find(user_name,password)
+    def login(self,user_name ,is_login,password):
+        self.user.check(user_name,password)
+        self.user.change_login_status(user_name, is_login)
             
     def register(self, user_name,password):
         self.user.add(user_name,password)
@@ -33,7 +34,7 @@ class Administrator(user):
         self.permissions=['reset_password','creat_user','delete_user','get_all_users']
         self.db=UserDB()
 
-    def delete_user(self,user_name):#删除用户
+    def delete_user(self,self.user_name):#删除用户
         self.db.delete(user_name)
 
     def creat_user(self,user_name,password):#创建用户
