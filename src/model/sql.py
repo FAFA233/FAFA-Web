@@ -17,6 +17,9 @@ class DB(object):
     def find(self):
         pass
 
+    def check(self):
+        pass
+
 class UserDB(DB):
     def __init__(self):#UserDB类构造函数,调用DB类,将user.db作为参数传递给它
         super(UserDB, self).__init__("user.db")
@@ -27,7 +30,6 @@ class UserDB(DB):
      
     def delete(self,name,password):#在user表中删除用户信息
         self.connection.execute(f"DELETE FROM users WHERE name='{name}' AND password='{password}'")
-        #删除
     
     def change(self,name,password):#更改指定用户名称的密码
         self.connection.execute(f"UPDATE users SET password='{password}' WHERE name='{name}'")
@@ -37,15 +39,17 @@ class UserDB(DB):
     def find(self,name) -> str:#查找指定用户,返回列表中用户信息
         result = self.connection.execute(f"SELECT * FROM users WHERE name='{name}'")
         # 查询条件,指定筛选条件.根据您具体的表结构定义的列名
-        user = result.fechone()
+        user = result.fetchone()
         return user
     
     def change_login_status(self,name, is_login):#根据用户名字和登录状态更新is_login的值
-            self.connection.execute(f"UPDATE users SET is_login={int(is_login)} WHERE name='{name}'")
+        self.connection.execute(f"UPDATE users SET is_login={int(is_login)} WHERE name='{name}'")
             
-    def get_all_users(self):#获取全部用户信息
-        result=self.connection.execute(f"SELECT * FROM users")
-        user=result.fetchall()
-        return user
-
+ 
+    def check(self,username,password):#检查用户名与密码是否匹配
+        mate="SELECT username FROM users WHERE username=? AND password=?"
+        result=self.connection.execute(mate,(username,password)).fetchone()
+        if result is None:
+            raise Exception("用户名与密码未匹配")
+    
 
