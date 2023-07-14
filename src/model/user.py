@@ -34,7 +34,7 @@ class Administrator(user):
         self.permissions=['reset_password','creat_user','delete_user','get_all_users']
         self.db=UserDB()
 
-    def delete_user(self,self.user_name):#删除用户
+    def delete_user(self,user_name):#删除用户
         self.db.delete(user_name)
 
     def creat_user(self,user_name,password):#创建用户
