@@ -7,42 +7,84 @@ class user():
         self.password=request.form.get('password')
         self.new_password=request.form.get('new_password')
         self.is_login=request.form.get('is_login')
-        self.permissions=[]#用户权限列表
+        self.permissions=['login','register','change','delete']#用户权限列表
 
     def login(self,user_name ,is_login,password):
         self.user.check(user_name,password)
         self.user.change_login_status(user_name, is_login)
             
-    def register(self, user_name,password):
+    def register(self,user_name,password):
         self.user.add(user_name,password)
         
     def change(self,user_name,new_password):
-        self.user.change(user_name, new_password) 
+        self.user.change(user_name,new_password) 
 
-    def delete(self,user_name, new_password):
-        self.user.delete(user_name, new_password)
+    def delete(self,user_name,new_password):
+        self.user.delete(user_name,new_password)
        
     def login_stastus(self,user_name,is_login):
         self.user.change_login_status(user_name,is_login)
-
+ 
     def has_permission(self,permission):#判断用户是否有权限
         return permission in self.permissions
 
 class Administrator(user):
-    def __init__(self):#赋予管理员三个权限
+    def __init__(self):#赋予管理员四个权限
         super().__init__()
-        self.permissions=['reset_password','creat_user','delete_user','get_all_users']
-        self.db=UserDB()
+        self.permissions=['reset_password','delete_user','promote_admin']
+        self.admin=UserDB()
 
     def delete_user(self,user_name):#删除用户
-        self.db.delete(user_name)
+        user_delete=self.admin.find(user_name)
+        if user_delete is not None and user_delete != self and user_delete.user_name != self.user_name:
+            #判断要删除的用户对象是否为空,是否与管理员对象不同，并且用户名也不同。
+            self.admin.delete(user_delete.user_name)
+        else:
+            raise Exception("删除失败")
+        
+    def reset_password(self,user_name):
+        user_reset=self.admin.find(user_name)
+        if user_reset is not None and user_reset != self and user_reset.user_name != self.user_name:
+            self.admin.change(user_name,"123456")
+        else:
+            raise Exception("重置失败")
 
-    def creat_user(self,user_name,password):#创建用户
-        self.db.add(user_name,password)
+    def     
 
-    def reset_password(self,user_name,password):#重置用户密码
-        self.db.change(user_name,password)
 
-    def get_all_users(self):#获取全部用户信息
-        return self.user.get_all_users()
+
+
+
+
+
+    
+
+    def promote_admin(self,user_name):#升级为管理员
+        user_promote=self.admin.find(user_name)
+        if (
+            user_promote is not None
+            and user_promote != self
+            and user_promote.user_name != self.user_name
+            and 'promote_admin' not in user_promote.permissions
+        ):
+            user_promote.permissions.append('promote_admin')
+        else:
+            raise Exception("升级失败")
+        
+
+        
+
+        
+        
+    
+        
+    
+
+
+
+
+
+
+
+
 
