@@ -12,8 +12,9 @@ user=user()
 def login():
     user_name = request.form.get('username')
     password = request.form.get('password')
+    is_login = request.form.get('is_login')
     try:
-        user.login(user_name, password)
+        user.login(user_name,is_login, password)
         logger.info('用户成功登录：{}'.format(user_name))
     except Exception as e:
         logger.error('登录失败：{}'.format(e))

@@ -9,8 +9,14 @@ class user():
         self.is_login=request.form.get('is_login')
         self.permissions=['login','register','change','delete']#用户权限列表
 
+<<<<<<< HEAD
     def login(self,user_name,password):
         self.user.check(user_name,password)
+=======
+    def login(self,user_name ,is_login,password):
+        self.user.check(user_name,password)
+        self.user.change_login_status(user_name, is_login)
+>>>>>>> 634f63eec1c9d77d0a6f8f94a880a5db2d874b09
             
     def register(self,user_name,password):
         self.user.add(user_name,password)
@@ -33,6 +39,7 @@ class Administrator(user):
         self.permissions=['reset_password','delete_user','promote_admin']
         self.admin=UserDB()
 
+<<<<<<< HEAD
     def delete_user(self,user_name):#删除用户
         user_delete=self.admin.find(user_name)
         if user_delete is not None and user_delete != self and user_delete.user_name != self.user_name:
@@ -83,6 +90,10 @@ class Administrator(user):
 
 
 
+=======
+    def delete_user(self,self.user_name):#删除用户
+        self.db.delete(user_name)
+>>>>>>> 634f63eec1c9d77d0a6f8f94a880a5db2d874b09
 
 
 
