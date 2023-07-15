@@ -1,0 +1,4 @@
+{
+    "python.analysis.placeholderCheck": true,
+    "python.analysis.typeCheckingMode": "basic"
+}
