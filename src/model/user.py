@@ -29,47 +29,38 @@ class user():
         return permission in self.permissions
 
 class Administrator(user):
-    def __init__(self):#赋予管理员四个权限
+    def __init__(self):#赋予管理员三个权限
         super().__init__()
         self.permissions=['reset_password','delete_user','promote_admin']
         self.admin=UserDB()
 
-    def delete_user(self,user_name):#删除用户
+    def delete_user(self,user_name,password):#删除用户
         user_delete=self.admin.find(user_name)
-        if user_delete is not None and user_delete != self and user_delete.user_name != self.user_name:
+        if user_delete is not None and user_delete != self and user_delete != self.user_name:
             #判断要删除的用户对象是否为空,是否与管理员对象不同，并且用户名也不同。
-            self.admin.delete(user_delete.user_name)
+            try:
+                self.admin.check(user_name,password)#检查用户名是否与密码匹配
+                self.admin.delete(user_name,password)#删除
+            except:
+                raise Exception("删除失败")
         else:
-            raise Exception("删除失败")
+            raise Exception("用户未找到")
         
     def reset_password(self,user_name):
         user_reset=self.admin.find(user_name)
-        if user_reset is not None and user_reset != self and user_reset.user_name != self.user_name:
+        if user_reset is not None and user_reset != self and user_reset != self.user_name:
             self.admin.change(user_name,"123456")
         else:
             raise Exception("重置失败")
-
-    def     
-
-
-
-
-
-
-
+        
     
 
-    def promote_admin(self,user_name):#升级为管理员
-        user_promote=self.admin.find(user_name)
-        if (
-            user_promote is not None
-            and user_promote != self
-            and user_promote.user_name != self.user_name
-            and 'promote_admin' not in user_promote.permissions
-        ):
-            user_promote.permissions.append('promote_admin')
-        else:
-            raise Exception("升级失败")
+        
+    
+
+
+
+   
         
 
         
