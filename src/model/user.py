@@ -31,7 +31,7 @@ class user():
 class Administrator(user):
     def __init__(self):#赋予管理员三个权限
         super().__init__()
-        self.permissions=['reset_password','delete_user','promote_admin']
+        self.permissions=['reset_password','delete_user']
         self.admin=UserDB()
 
     def delete_user(self,user_name,password):#删除用户
