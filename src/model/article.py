@@ -1,5 +1,4 @@
 import time
-from typing import Any, Dict, Tuple
 from sqlmodel import SQLModel,create_engine,Session
 class ArticleModel(SQLModel):
     article_name: str
