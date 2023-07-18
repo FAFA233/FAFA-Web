@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from model.user import user
+from src.model.user import user
 
 import logging
 # 配置日志记录
