@@ -1,5 +1,5 @@
 from src.model.article import ArticleDB
-from flask import Flask, request, jsonify
+from flask import request, jsonify
 import logging
 import os
 # 配置日志记录
@@ -22,10 +22,11 @@ class ArticleController:
             file_name = '{}.txt'.format(article_name)  # 文本文件名以文章名命名
             with open(file_name, 'w') as file:
                 file.write(article_body)
-            logger.info('文章内容存储成功{}'.format(article_name))   
+            logger.info('文章内容存储成功{}'.format(article_name))
+            return jsonify({'message': '文章存储成功'})   
         except Exception as e:
             logger.error('文章信息存储失败:{}'.format(e))
-
+            return jsonify({'message': '文章存储失败'})
     def update(self):
         try:
             data = request.get_json()
@@ -38,8 +39,10 @@ class ArticleController:
             with open(file_name,'w')as file:
                 file.write(new_article_body)
             logger.info('更新成功：{}'.format(new_article_name))
+            return jsonify({'message': '文章更新成功'})
         except Exception as e:
             logger.error('更新失败:{}'.format(e))
+            return jsonify({'message': '文章更新失败'})
     
     def delete_article(self):
         try:
