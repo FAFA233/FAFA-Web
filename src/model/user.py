@@ -38,13 +38,12 @@ class Administrator(user):
         user_delete=self.admin.find(user_name)
         if user_delete is not None and user_delete != self and user_delete != self.user_name:
             #判断要删除的用户对象是否为空,是否与管理员对象不同，并且用户名也不同。
-            try:
                 self.admin.check(user_name,password)#检查用户名是否与密码匹配
                 self.admin.delete(user_name,password)#删除
-            except:
-                raise Exception("删除失败")
-        else:
-            raise Exception("用户未找到")
+        else:       
+             raise Exception("删除失败")
+
+
         
     def reset_password(self,user_name):
         user_reset=self.admin.find(user_name)
