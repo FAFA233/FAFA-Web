@@ -1,7 +1,8 @@
 from flask import Flask, request, jsonify
 import sys
-sys.path.append('E:/workspace/FAFA-Web/')
+sys.path.append('E:/workspace/FAFA-Web/src/')
 from sql import UserDB
+
 class user():
     def __init__(self):
         self.user=UserDB()
@@ -12,7 +13,7 @@ class user():
         self.permissions=['login','register','change','delete']#用户权限列表
 
     def login(self,user_name ,is_login,password):
-        self.user.check(user_name,password)
+        self.user.check(user_name,password) 
         self.user.change_login_status(user_name, is_login)
             
     def register(self,user_name,password):
