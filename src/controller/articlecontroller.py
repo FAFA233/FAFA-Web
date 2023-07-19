@@ -1,3 +1,5 @@
+import sys
+sys.path.append('E:/workspace/FAFA-Web/')
 from src.model.article import ArticleDB
 from flask import request, jsonify
 import logging
@@ -7,9 +9,11 @@ logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 # 创建日志记录器
 logger = logging.getLogger(__name__)
+
 class ArticleController:
+    articleDB = ArticleDB()
     def __init__(self):
-        self.articleDB = ArticleDB()
+        pass
         
     def creat(self):
         try:
