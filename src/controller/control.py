@@ -15,6 +15,7 @@ def login():
     is_login = request.form.get('is_login')
     try:
         user.login(user_name,is_login, password)
+        login_status()
         logger.info('用户成功登录：{}'.format(user_name))
     except Exception as e:
         logger.error('登录失败：{}'.format(e))
