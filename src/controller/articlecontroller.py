@@ -27,6 +27,7 @@ class ArticleController:
         except Exception as e:
             logger.error('文章信息存储失败:{}'.format(e))
             return jsonify({'message': '文章存储失败'})
+        
     def update(self):
         try:
             data = request.get_json()
