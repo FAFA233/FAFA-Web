@@ -11,11 +11,12 @@ logger = logging.getLogger(__name__)
 user=user()
 
 def login():
+    user_id = request.form.get('user_id')
     user_name = request.form.get('username')
     password = request.form.get('password')
     is_login = request.form.get('is_login')
     try:
-        user.login(user_name,is_login, password)
+        user.login(user_id,user_name,is_login, password)
         login_status()
         logger.info('用户成功登录：{}'.format(user_name))
         return jsonify({'message': '登录成功'}) 
@@ -33,6 +34,7 @@ def register():
     except Exception as e:
         logger.error('注册：{}'.format(e))
         return jsonify({'message': '注册失败'}) 
+    
 def change_password():
     user_name = request.form.get('username')
     new_password = request.form.get('new_password')
@@ -45,10 +47,11 @@ def change_password():
         return jsonify({'message': '修改失败'}) 
     
 def delete():
+    user_id = request.form.get('user_id')
     user_name = request.form.get('username')
     password = request.form.get('password')
     try:
-        user.delete(user_name, password)
+        user.delete(user_id,user_name, password)
         logger.info('删除成功：{}'.format(user_name))
         return jsonify({'message': '删除成功'}) 
     except Exception as e:
