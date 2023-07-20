@@ -15,9 +15,9 @@ class ArticleController:
     def __init__(self):
         pass
         
-    def creat(self):
+    def creat(self,data):
         try:
-            data = request.get_json()
+            
             author_name = data['author_name']
             article_name = data['article_name']
             article_body = data['article_body']
@@ -27,14 +27,13 @@ class ArticleController:
             with open(file_name, 'w') as file:
                 file.write(article_body)
             logger.info('文章内容存储成功{}'.format(article_name))
-            return jsonify({'message': '文章存储成功'})   
+           
         except Exception as e:
-            logger.error('文章信息存储失败:{}'.format(e))
-            return jsonify({'message': '文章存储失败'})
+            pass
         
-    def update(self):
+    def update(self, data):
         try:
-            data = request.get_json()
+            
             author_name = data['author_name']
             article_name = data['article_name']
             new_author_name = data['new_author_name']
@@ -46,14 +45,14 @@ class ArticleController:
             with open(file_name,'w')as file:
                 file.write(new_article_body)
             logger.info('更新成功：{}'.format(new_article_name))
-            return jsonify({'message': '文章更新成功'})
+            
         except Exception as e:
-            logger.error('更新失败:{}'.format(e))
-            return jsonify({'message': '文章更新失败'})
+            pass
+            
     
-    def delete_article(self):
+    def delete_article(self,data):
         try:
-            data = request.get_json()
+           
             author_name = data['author_name']
             article_name = data['article_name']
             article_body = data['article_body']
@@ -62,10 +61,8 @@ class ArticleController:
             os.remove(file_name)
             logger.info('删除成功：{}'.format(article_name))
 
-            return jsonify({'message': '文章删除成功'})
         except Exception as e:
-            logger.error('删除失败:{}'.format(e))
-            return jsonify({'message': '文章删除失败'})
+            pass
 
 app = Flask(__name__)
 
@@ -75,17 +72,31 @@ article_controller = ArticleController()
 # 路由 - 创建文章
 @app.route('/creat_article', methods=['POST'])
 def creat_article():
-    return article_controller.creat()
-
-# 路由 - 更新文章
+    try:
+        article_controller.creat(request.get_json())
+        return jsonify({'message': '文章上传成功'})
+    except Exception as e:
+            logger.error('上传失败:{}'.format(e))
+            return jsonify({'message': '文章上传失败'})
+    
 @app.route('/update_article', methods=['POST'])
 def update_article():
-    return article_controller.update()
-
+    try:
+        article_controller.update(request.get_json())
+        return jsonify({'message': '文章更新成功'})
+    except Exception as e:
+            logger.error('更新失败:{}'.format(e))
+            return jsonify({'message': '文章更新失败'})
+    
 # 路由 - 删除文章
 @app.route('/delete_article', methods=['POST'])
 def delete_article():
-    return article_controller.delete_article()
+    try:
+        article_controller.delete_article(request.get_json())
+        return jsonify({'message': '文章删除成功'})
+    except Exception as e:
+            logger.error('删除失败:{}'.format(e))
+            return jsonify({'message': '文章删除失败'})
 
 # 运行 Flask 应用
 if __name__ == '__main__':
