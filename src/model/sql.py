@@ -6,6 +6,7 @@ class DB(object):
         self.database_url = f"sqlite://{path}"
         self.connection = create_engine(self.database_url).connect()
 
+
     def add(self):
         pass
 
@@ -23,7 +24,7 @@ class DB(object):
 
 class UserDB(DB):
     def __init__(self):#UserDB类构造函数,调用DB类,将user.db作为参数传递给它
-        super(UserDB, self).__init__("user.db")
+        super(UserDB, self).__init__("sqlite:///user.db")
 
     def add(self,name, password):#向users表中添加新用户,将信息插入到数据库中
         self.user_id=str(uuid.uuid4())
