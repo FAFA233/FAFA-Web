@@ -26,8 +26,8 @@ class UserDB(DB):
         super(UserDB, self).__init__("user.db")
 
     def add(self,name, password):#向users表中添加新用户,将信息插入到数据库中
-        user_id=str(uuid.uuid4())
-        self.connection.execute(f"INSERT INTO users (user_id, username, password) VALUES ('{user_id}', '{name}', '{password}')")
+        self.user_id=str(uuid.uuid4())
+        self.connection.execute(f"INSERT INTO users (user_id, username, password) VALUES ('{self.user_id}', '{name}', '{password}')")
         
      
     def delete(self, user_id, username, password):#在user表中删除用户信息
