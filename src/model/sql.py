@@ -2,7 +2,7 @@ from sqlmodel import create_engine
 import uuid
 
 class DB(object):
-    def __init__(self, path):
+    def __init__(self, path : str):
         self.database_url = f"sqlite://{path}"
         self.connection = create_engine(self.database_url).connect()
 
