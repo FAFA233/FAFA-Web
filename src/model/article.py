@@ -7,8 +7,8 @@ class ArticleModel(SQLModel):
     update_time: float
 
 class ArticleDB:
-    def _init__(self):
-        self.engine = create_engine("s_qlite:///articles.db")
+    def __init__(self):
+        self.engine = create_engine("sqlite:///articles.db")
         SQLModel.metadata.create_all(self.engine)
 
     def add_article(self, article_name, author_name):
