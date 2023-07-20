@@ -1,5 +1,6 @@
 import time
 from sqlmodel import SQLModel,create_engine,Session
+
 class ArticleModel(SQLModel):
     article_name: str
     author_name: str
