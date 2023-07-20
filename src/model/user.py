@@ -12,7 +12,8 @@ class user():
         self.new_password=request.form.get('new_password')
         self.is_login=request.form.get('is_login')
         self.permissions=['login','register','change','delete']#用户权限列表
-
+        
+    
     def login(self,user_id,user_name ,is_login,password):
         self.user.check(user_name,password)
         self.user.change_login_status(user_id, is_login)
