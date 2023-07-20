@@ -48,9 +48,9 @@ class UserDB(DB):
         self.connection.execute(f"UPDATE users SET is_login={int(is_login)} WHERE user_id='{user_id}'")
             
  
-    def check(self, user_id,username, password):#检查用户名与密码是否匹配
+    def check(self,username, password):#检查用户名与密码是否匹配
         mate="SELECT username FROM users WHERE user_id=? username=? AND password=?"
-        result=self.connection.execute(mate, (user_id,username, password)).fetchone()
+        result=self.connection.execute(mate, (username, password)).fetchone()
         if result is None:
             raise Exception("用户名与密码未匹配")
         

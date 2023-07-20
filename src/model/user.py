@@ -14,7 +14,7 @@ class user():
         self.permissions=['login','register','change','delete']#用户权限列表
 
     def login(self,user_id,user_name ,is_login,password):
-        self.user.check(user_id,user_name,password)
+        self.user.check(user_name,password)
         self.user.change_login_status(user_id, is_login)
             
     def register(self,user_name,password):
@@ -38,17 +38,17 @@ class Administrator(user):
         self.permissions=['reset_password','delete_user']
         self.admin=UserDB()
 
+
     def delete_user(self,user_id,user_name,password):#删除用户
         user_delete=self.admin.find(user_id)
         if user_delete is not None and user_delete != self and user_delete != self.user_id:
             #判断要删除的用户对象是否为空,是否与管理员对象不同，并且用户名也不同。
-                self.admin.check(user_id,user_name,password)#检查用户名是否与密码匹配
+                self.admin.check(user_name,password)#检查用户名是否与密码匹配
                 self.admin.delete(user_id,user_name,password)#删除
         else:       
              raise Exception("删除失败")
 
 
-        
     def reset_password(self,user_id):
         user_reset=self.admin.find(user_id)
         if user_reset is not None and user_reset != self and user_reset != self.user_id:
