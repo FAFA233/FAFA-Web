@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 import sys
-sys.path.append('E:/workspace/FAFA-Web/src/')
+sys.path.append('E:/workspace/FAFA-Web/src/model/')
 from sql import UserDB
 
 class user():
