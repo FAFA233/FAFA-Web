@@ -50,7 +50,7 @@ class UserDB(DB):
             
  
     def check(self,username, password):#检查用户名与密码是否匹配
-        mate="SELECT username FROM users WHERE user_id=? username=? AND password=?"
+        mate="SELECT username FROM users WHERE user_id=? AND username=? AND password=?"
         result=self.connection.execute(mate, (username, password)).fetchone()
         if result is None:
             raise Exception("用户名与密码未匹配")
