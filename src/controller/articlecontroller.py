@@ -63,7 +63,13 @@ class ArticleController:
 
         except Exception as e:
             pass
-
+    
+    def get_title(self):
+        try:
+            return  self.articleDB.get_all_article_names()
+        except Exception as e:
+             pass
+        
 app = Flask(__name__)
 
 # 创建文章控制器实例
@@ -97,6 +103,15 @@ def delete_article():
     except Exception as e:
             logger.error('删除失败:{}'.format(e))
             return jsonify({'message': '文章删除失败'})
+
+@app.route('/get_title',methods=['GET'])
+def get_title():   
+    try:
+        print(article_controller.get_title())
+        return jsonify(article_controller.get_title())
+    except Exception as e:
+        logger.error('获取失败:{}'.format(e))
+        return jsonify({'message': '获取失败'})
 
 # 运行 Flask 应用
 if __name__ == '__main__':

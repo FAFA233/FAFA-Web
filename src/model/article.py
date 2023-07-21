@@ -1,6 +1,6 @@
 import time
 from sqlmodel import SQLModel,create_engine,Session
-
+import json
 class ArticleModel(SQLModel):
     article_name: str
     author_name: str
@@ -13,7 +13,7 @@ class ArticleDB:
         SQLModel.metadata.create_all(self.engine)
 
     def add_article(self, article_name, author_name):
-        
+
         with Session(self.engine) as session:
             create_time = time.time()
             update_time = time.time()
@@ -44,3 +44,10 @@ class ArticleDB:
                 session.delete(article)
                 session.commit()
                 #查询并删除
+
+    def get_all_article_names(self) -> list:
+        with Session(self.engine) as session:
+            article_names = session.query(ArticleModel.article_name).all()
+            article_names = [name[0] for name in article_names]
+            article_dict_list = [{"article_name": name} for name in article_names]
+            return article_dict_list    
