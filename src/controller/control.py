@@ -26,7 +26,7 @@ def login():
         logger.error('登录失败：{}'.format(e))
         return jsonify({'message': '登录失败'}) 
 
-@app.route('/register', methods=['PSOT'])
+@app.route('/register', methods=['POST'])
 def register():
     user_name = request.form.get('username')
     password = request.form.get('password')
