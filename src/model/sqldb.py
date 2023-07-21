@@ -19,6 +19,7 @@ cursor.execute('''
            ('3', 'Alice Johnson', 'password789')
 ''')
 
+
 conn.commit()
 
 # 关闭游标和连接
