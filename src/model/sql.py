@@ -8,10 +8,11 @@ class SModel(SQLModel):
     password:str
 
 class DB(object):
-    def __init__(self):
+    def __init__(self,path):
 
-        self.engine = create_engine("sqlite:///user.db")
+        self.engine = create_engine("sqlite:///{path}")
         SQLModel.metadata.create_all(self.engine)
+        self.connection = self.engine.connect()
 
 
     def add(self):

@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 app=Flask(__name__)
 user=user()
 
-@app.route('/login', methods=['GET'])
+@app.route('/login', methods=['POST'])
 def login():
     user_id = request.form.get('user_id')
     user_name = request.form.get('username')
@@ -26,7 +26,7 @@ def login():
         logger.error('登录失败：{}'.format(e))
         return jsonify({'message': '登录失败'}) 
 
-@app.route('/register', methods=['GET'])
+@app.route('/register', methods=['PSOT'])
 def register():
     user_name = request.form.get('username')
     password = request.form.get('password')
@@ -38,7 +38,7 @@ def register():
         logger.error('注册：{}'.format(e))
         return jsonify({'message': '注册失败'}) 
 
-@app.route('/change_password', methods=['GET'])    
+@app.route('/change_password', methods=['POST'])    
 def change_password():
     user_name = request.form.get('username')
     new_password = request.form.get('new_password')
@@ -50,7 +50,7 @@ def change_password():
         logger.error('修改失败：{}'.format(e))
         return jsonify({'message': '修改失败'}) 
     
-@app.route('/delete', methods=['GET'])   
+@app.route('/delete', methods=['POST'])   
 def delete():
     user_id = request.form.get('user_id')
     user_name = request.form.get('username')
