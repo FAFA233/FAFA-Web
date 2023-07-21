@@ -72,5 +72,3 @@ def login_status():
     except Exception as e:
         logger.error('登录状态修改失败：{}'.format(e))
 
-
-

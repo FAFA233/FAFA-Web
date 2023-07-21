@@ -13,6 +13,7 @@ class ArticleDB:
         SQLModel.metadata.create_all(self.engine)
 
     def add_article(self, article_name, author_name):
+        
         with Session(self.engine) as session:
             create_time = time.time()
             update_time = time.time()
