@@ -1,10 +1,17 @@
-from sqlmodel import create_engine
+from sqlmodel import create_engine,SQLModel
+
 import uuid
 
+class SModel(SQLModel):
+    user_id: str
+    user_name: str
+    password:str
+
 class DB(object):
-    def __init__(self, path):
-        self.database_url = f"sqlite://{path}"
-        self.connection = create_engine(self.database_url).connect()
+    def __init__(self):
+
+        self.engine = create_engine("sqlite:///user.db")
+        SQLModel.metadata.create_all(self.engine)
 
 
     def add(self):
@@ -54,8 +61,8 @@ class UserDB(DB):
         result=self.connection.execute(mate, (username, password)).fetchone()
         if result is None:
             raise Exception("用户名与密码未匹配")
-        
-    
+
+  
         
     
 
