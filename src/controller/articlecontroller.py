@@ -71,6 +71,18 @@ class ArticleController:
         except Exception as e:
             pass
         
+    def check(self,data):
+        try:
+            author_name = data['author_name']
+            article_name = data['article_name']
+        
+            file_name='{}.txt'.format(article_name)
+            with open(file_name, 'r') as file:
+                article_body=file.read()
+            return article_body
+        except Exception as e:
+            pass
+
 app = Flask(__name__)
 
 # 创建文章控制器实例
@@ -113,6 +125,14 @@ def get_title():
     except Exception as e:
         logger.error('获取失败:{}'.format(e))
         return jsonify({'message': '获取失败'})
+    
+@app.route('/check', methods=['POST'])    
+def check():
+    try:
+        return jsonify (article_controller.check(request.get_json()))
+    except Exception as e:
+        logger.error('查看失败:{}'.format(e))
+        return jsonify({'message': '查看失败'})
 
 # 运行 Flask 应用
 if __name__ == '__main__':

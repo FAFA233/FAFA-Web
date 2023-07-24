@@ -9,7 +9,7 @@ class ArticleModel(SQLModel):
 
 class ArticleDB:
     def __init__(self):
-        self.engine = create_engine("sqlite:///articles.db")
+        self.engine = create_engine("sqlite:///src/model/articles.db")
         SQLModel.metadata.create_all(self.engine)
 
     def add_article(self, article_name, author_name):
@@ -18,6 +18,7 @@ class ArticleDB:
             update_time = time.time()
             article = ArticleModel(article_name=article_name, author_name=author_name,
                                     create_time=create_time, update_time=update_time)
+            print(article)
             session.add(article)
             session.commit()
     
