@@ -2,6 +2,7 @@ import time
 from sqlmodel import SQLModel,create_engine,Session
 import json
 class ArticleModel(SQLModel):
+    __tablename__ = "articles" 
     article_name: str
     author_name: str
     create_time: float

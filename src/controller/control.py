@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import sys
+print(sys.path)
 sys.path.append('E:/workspace/FAFA-Web/')
 from src.model.user import user
 import logging
