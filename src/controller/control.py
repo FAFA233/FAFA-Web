@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 import sys
-sys.path.append('E:/workspace/FAFA-Web/')
+import os
 from src.model.user import user
 import logging
 # 配置日志记录
