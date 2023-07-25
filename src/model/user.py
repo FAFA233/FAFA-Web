@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import uuid
 import sys
 sys.path.append('D:/code/python/FAFA-Web/src/model')
 from src.model.sql import UserDB
@@ -10,43 +11,48 @@ logging.basicConfig(level=logging.INFO,
 # 创建日志记录器
 logger = logging.getLogger(__name__)
 
+
 class User:
     userDB = UserDB()
 
-    def __init__(self):
-        pass
+    """用户初始化所用的方法，其将为系统创建一个新的未登录的用户对象"""
+    def __init__(self, username : str, password : str):
+        self.username = username
+        self.password = password
+        self.is_login = False
 
-    def login(self, data):
+    """用户在创建之后可调用的其中一种方法，即为通俗的登录过程，在此方法中，用户将获得True的登录状态"""
+    def login(self, user_id):
         try:
-            user_id = data['user_id']
-            user_name = data['username']
-            is_login = data['is_login']
-            password = data['password']
-            self.userDB.check(user_name, password)
-            self.userDB.change_login_status(user_id, is_login)
-            logger.info('用户登录成功：{}'.format(user_name))
+            self.user_id = user_id
+            self.userDB.check(self.username, self.password)
+            self.userDB.change_login_status(self.user_id, True)
+            logger.info('用户登录成功：{}'.format(self.username))
+            self.is_login = True
         except Exception as e:
-            pass
+            logger.error("出现错误，用户登录失败：" + e.__str__())
 
-    def register(self, data):
+    """用户可选择的途径，注册将为用户创建新的身份，并提供True的登录状态"""
+    def register(self):
+        self.user_id = str(uuid.uuid4())
         try:
-            user_name = data['username']
-            password = data['password']
-            self.userDB.add(user_name, password)
-            logger.info('用户注册成功：{}'.format(user_name))
+            self.userDB.add(self.user_id, self.username, self.password)
+            self.userDB.change_login_status(self.user_id, True)
+            logger.info('用户注册成功：{}'.format(self.username))
+            self.is_login = True
         except Exception as e:
-            pass
+            logger.error("出现错误，用户注册失败：" + e.__str__())
 
-    def change(self, data):
+    """用户可对自身的密码进行修改"""
+    def change(self, user_id, user_name, new_password):
         try:
-            user_id = data['user_id']
-            new_password = data['new_password']
-            self.userDB.change(user_id, new_password)
-            logger.info('用户密码修改成功：{}'.format(user_id))
+            self.userDB.change(self.user_id, new_password)
+            logger.info('用户密码修改成功：{}'.format(self.user_id))
         except Exception as e:
-            pass
+            logger.error("出现错误，密码修改失败：" + e.__str__())
 
     def delete_user(self, data):
+        # TODO: ?
         try:
             user_id = data['user_id']
             user_name = data['username']
@@ -54,26 +60,18 @@ class User:
             self.userDB.delete(user_id, user_name, new_password)
             logger.info('用户删除成功：{}'.format(user_id))
         except Exception as e:
-            pass
-
-    def change_login_status(self, user_id, is_login):
-        try:
-            self.userDB.change_login_status(user_id, is_login)
-            logger.info('用户登录状态更新成功：{}'.format(user_id))
-        except Exception as e:
-            pass
+            logger.error("出现错误，用户删除失败：" + e.__str__())
 
     def has_permission(self, permission):
+        # TODO: ?
         try:
-            return permission in self.userDB.get_permissions()
+            return permission in self.userDB # TODO:
 
         except Exception as e:
             pass
-app = Flask(__name__)
 
 class Administrator(User):
     def __init__(self):#赋予管理员三个权限
-        super().__init__()
         self.permissions=['reset_password','delete_user']
         self.admin=UserDB()
 
