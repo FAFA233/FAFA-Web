@@ -1,40 +1,77 @@
 from flask import Flask, request, jsonify
-from .sql import UserDB
+import sys
+sys.path.append('D:/code/python/FAFA-Web/src/model')
+from src.model.sql import UserDB
+import logging
+import os
+# 配置日志记录
+logging.basicConfig(level=logging.INFO, 
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+# 创建日志记录器
+logger = logging.getLogger(__name__)
 
+class User:
+    userDB = UserDB()
+
+    def __init__(self):
+        pass
+
+    def login(self, data):
+        try:
+            user_id = data['user_id']
+            user_name = data['username']
+            is_login = data['is_login']
+            password = data['password']
+            self.userDB.check(user_name, password)
+            self.userDB.change_login_status(user_id, is_login)
+            logger.info('用户登录成功：{}'.format(user_name))
+        except Exception as e:
+            pass
+
+    def register(self, data):
+        try:
+            user_name = data['username']
+            password = data['password']
+            self.userDB.add(user_name, password)
+            logger.info('用户注册成功：{}'.format(user_name))
+        except Exception as e:
+            pass
+
+    def change(self, data):
+        try:
+            user_id = data['user_id']
+            new_password = data['new_password']
+            self.userDB.change(user_id, new_password)
+            logger.info('用户密码修改成功：{}'.format(user_id))
+        except Exception as e:
+            pass
+
+    def delete_user(self, data):
+        try:
+            user_id = data['user_id']
+            user_name = data['username']
+            new_password = data['new_password']
+            self.userDB.delete(user_id, user_name, new_password)
+            logger.info('用户删除成功：{}'.format(user_id))
+        except Exception as e:
+            pass
+
+    def change_login_status(self, user_id, is_login):
+        try:
+            self.userDB.change_login_status(user_id, is_login)
+            logger.info('用户登录状态更新成功：{}'.format(user_id))
+        except Exception as e:
+            pass
+
+    def has_permission(self, permission):
+        try:
+            return permission in self.userDB.get_permissions()
+
+        except Exception as e:
+            pass
 app = Flask(__name__)
 
-class user():
-    def __init__(self):
-        with app.app_context():
-            self.user=UserDB()
-            self.user_id=request.form.get('user_id')
-            self.user_name=request.form.get('username')
-            self.password=request.form.get('password')
-            self.new_password=request.form.get('new_password')
-            self.is_login=request.form.get('is_login')
-            self.permissions=['login','register','change','delete']#用户权限列表
-        
-    
-    def login(self,user_id,user_name ,is_login,password):
-        self.user.check(user_name,password)
-        self.user.change_login_status(user_id, is_login)
-            
-    def register(self,user_name,password):
-        self.user.add(user_name,password)
-        
-    def change(self,user_id,new_password):
-        self.user.change(user_id,new_password) 
-
-    def delete(self,user_id,user_name,new_password):
-        self.user.delete(user_id,user_name,new_password)
-       
-    def login_stastus(self,user_id,is_login):
-        self.user.change_login_status(user_id,is_login)
- 
-    def has_permission(self,permission):#判断用户是否有权限
-        return permission in self.permissions
-
-class Administrator(user):
+class Administrator(User):
     def __init__(self):#赋予管理员三个权限
         super().__init__()
         self.permissions=['reset_password','delete_user']
@@ -57,6 +94,7 @@ class Administrator(user):
             self.admin.change(user_id,"123456")
         else:
             raise Exception("重置失败")
+        
         
     
 
